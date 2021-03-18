@@ -386,6 +386,7 @@ Vagrant.configure("2") do |config|
 
   # ubuntu1804 and 2004 boxes do not have puppet installed:
   if(operating_system.include?("ubuntu18") || operating_system.include?("ubuntu20") || operating_system.include?("debian9"))
+    config.vm.provision "shell", inline: "systemctl disable hv-kvp-daemon.service &> /dev/null"
     config.vm.provision "shell", inline: "(apt update && apt install -y puppet) &> /dev/null"
   end
 
